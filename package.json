@@ -1,0 +1,31 @@
+{
+  "name": "oath",
+  "version": "1.0.0",
+  "description": "A simple, straightforward library that makes working with promises easier",
+  "main": "index.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benperez/oath.git"
+  },
+  "keywords": [
+    "promise",
+    "generator",
+    "utility",
+    "coroutine"
+  ],
+  "author": "Benjamin Perez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/benperez/oath/issues"
+  },
+  "homepage": "https://github.com/benperez/oath",
+  "devDependencies": {
+    "jscs": "1.10.x",
+    "jshint": "2.6.x",
+    "mocha": "2.x.x",
+    "xyz": "0.5.x"
+  }
+}
