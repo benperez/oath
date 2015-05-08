@@ -1,5 +1,5 @@
 # oath
-A simple, straightforward library that makes working with promises slightly simpler
+A simple, straightforward library that makes working with promises easier
 
 ## Proposed Functions
 ### Promise.all with a set level of concurrency
