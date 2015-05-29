@@ -37,3 +37,23 @@ exports.co = function(generator) {
     });
   });
 };
+
+// promote :: (a -> (Error -> b -> ()) -> ()) -> (a -> Promise b)
+exports.promote = function(nodeFunction) {
+  return arity(nodeFunction.length - 1, () => {
+    const $functionArgs = arguments;
+    return new Promise((resolve, reject) => {
+      Array.prototype.push.call(
+        $functionArgs,
+        error => {
+          if (error != null) {
+            reject(error);
+          } else {
+            resolve.apply(null, Array.prototype.slice.call(arguments, 1));
+          }
+        }
+      );
+      nodeFunction.apply(null, $functionArgs);
+    });
+  });
+};

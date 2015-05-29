@@ -75,3 +75,52 @@ describe('co', () => {
     });
   });
 });
+
+describe('promote', () => {
+  it('returns a function with the appropriate length', () => {
+    const f = oath.promote(callback => {
+      setTimeout(() => {
+        callback(null, 'foo');
+      }, 100);
+    });
+    assert.strictEqual(f.length, 0);
+    const g = oath.promote((a, callback) => {
+      setTimeout(() => {
+        callback(null, a);
+      }, 100);
+    });
+    assert.strictEqual(g.length, 1);
+    const h = oath.promote((a, b, callback) => {
+      setTimeout(() => {
+        callback(null, a, b);
+      }, 100);
+    });
+    assert.strictEqual(h.length, 2);
+  });
+
+  it('returns a function which returns a promise', () => {
+    const f = oath.promote(callback => {
+      setTimeout(() => {
+        callback(null, 'foo');
+      }, 100);
+    });
+    const p = f();
+    assert(p instanceof Promise);
+  });
+
+  it('returns a function which returns a promise for a value', (done) => {
+    const f = oath.promote(callback => {
+      setImmediate(() => {
+        callback(null, 'foo');
+      });
+    });
+    const p = f();
+    assert(p instanceof Promise);
+    p.then(value => {
+      assert.strictEqual(value, 'foo');
+      done();
+    }, () => {
+      assert.fail();
+    }).catch(err => console.err(err));
+  });
+});

@@ -62,3 +62,13 @@ const readAndWrite = oath.co(function*(suffix) {
 
 readAndWrite('foo').then(console.log, console.err);
 ```
+### promote
+```javascript
+const fs = require('fs');
+
+const readFile = oath.promote(fs.readFile);
+
+readFile('foo.txt', {encoding: 'utf8'})
+  .then(filecontents => console.log('Here is foo.txt: ', filecontents))
+  .catch(error => console.error('Got an error!', error));
+```
